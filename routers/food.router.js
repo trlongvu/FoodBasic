@@ -1,39 +1,39 @@
 const express = require('express');
-const categoryRouter = express.Router();
+const foodRouter = express.Router();
 
 const {
-  createCategory,
-  getCategories,
-  getCategory,
-  updateCategory,
-  deleteCategory,
-} = require('../controllers/category.controller');
+  createFood,
+  getFoods,
+  getFood,
+  updateFood,
+  deleteFood,
+} = require('../controllers/food.controller');
 const asyncMiddleware = require('../middleware/async.middleware');
 const authMiddleware = require('../middleware/auth.middleware');
 const Role = require('../middleware/role.middleware');
 const typeRoles = require('../constants/type.role');
 
-categoryRouter
+foodRouter
   .route('/')
   .post(
     asyncMiddleware(authMiddleware),
     Role(typeRoles.ADMIN),
-    asyncMiddleware(createCategory),
+    asyncMiddleware(createFood),
   )
-  .get(asyncMiddleware(getCategories));
+  .get(asyncMiddleware(getFoods));
 
-categoryRouter
+foodRouter
   .route('/:_id')
-  .get(asyncMiddleware(getCategory))
+  .get(asyncMiddleware(getFood))
   .patch(
     asyncMiddleware(authMiddleware),
     Role(typeRoles.ADMIN),
-    asyncMiddleware(updateCategory),
+    asyncMiddleware(updateFood),
   )
   .delete(
     asyncMiddleware(authMiddleware),
     Role(typeRoles.ADMIN),
-    asyncMiddleware(deleteCategory),
+    asyncMiddleware(deleteFood),
   );
 
-module.exports = categoryRouter;
+module.exports = foodRouter;

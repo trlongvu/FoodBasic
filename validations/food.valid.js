@@ -50,7 +50,9 @@ const updateFoodSchema = Joi.object({
     'string.base': `Danh mục phải là chuỗi ký tự`,
     'string.empty': `Danh mục không được để trống`,
   }),
-}).min(1);
+})
+  .min(1)
+  .messages({ 'object.min': `Yêu cầu tối thiểu 1 trường để update` });
 
 module.exports = {
   validateCreateFood: (body) => createFoodSchema.validate(body),

@@ -23,6 +23,10 @@ const createOrderSchema = Joi.object({
     'number.min': 'Tổng tiền không được nhỏ hơn 0',
     'any.required': 'Yêu cầu phải có tổng tiền',
   }),
+  payment_method: Joi.string().optional(),
+  is_payment: Joi.string().optional(),
+  status: Joi.string().optional(),
+  cart_id: Joi.string().optional(),
 });
 
 const updateOrderSchema = Joi.object({
@@ -44,7 +48,13 @@ const updateOrderSchema = Joi.object({
     'number.base': 'Tổng tiền phải là số',
     'number.min': 'Tổng tiền không được nhỏ hơn 0',
   }),
-}).min(1);
+  payment_method: Joi.string().optional(),
+  is_payment: Joi.boolean().optional(),
+  status: Joi.string().optional(),
+  cart_id: Joi.string().optional(),
+})
+  .min(1)
+  .messages({ 'object.min': `Yêu cầu tối thiểu 1 trường để update` });
 
 module.exports = {
   validateCreateOrder: (body) => createOrderSchema.validate(body),

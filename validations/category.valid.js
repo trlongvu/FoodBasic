@@ -20,7 +20,9 @@ const updateCategorySchema = Joi.object({
     'string.empty': `Ảnh không được để trống`,
     'string.uri': `Ảnh phải là URL hợp lệ`,
   }),
-}).min(1);
+})
+  .min(1)
+  .messages({ 'object.min': `Yêu cầu tối thiểu 1 trường để update` });
 
 module.exports = {
   validateCreateCategory: (body) => createCategorySchema.validate(body),
