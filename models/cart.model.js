@@ -10,7 +10,7 @@ const cartSchema = new mongoose.Schema(
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'account',
     },
-    item: [
+    items: [
       {
         food_id: {
           type: mongoose.SchemaTypes.ObjectId,
