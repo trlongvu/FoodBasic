@@ -66,7 +66,7 @@ module.exports = {
 
     if (address) query.address = { $regex: `.*${address}.*`, $options: 'i' };
     const foods = await FoodModel.find(query)
-      .populate('category', '_id name')
+      .populate('category_id', '_id name')
       .skip(PER_PAGE * (page - 1))
       .limit(PER_PAGE)
       .sort({ createdAt: -1 })
